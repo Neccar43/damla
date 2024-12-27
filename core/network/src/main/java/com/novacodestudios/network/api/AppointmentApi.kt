@@ -14,8 +14,8 @@ interface AppointmentApi {
     @GET("appointment/active/{donorId}")
     suspend fun getActiveAppointmentsByDonorId(@Path("donorId") donorId: Int): List<Appointment>
 
-    @GET("appointment/{donorId}")
-    suspend fun getAppointmentsByDonorId(@Path("donorId") donorId: Int): List<Appointment>
+    @GET("appointment/donor/{id}")
+    suspend fun getAppointmentsByDonorId(@Path("id") donorId: Int): List<Appointment>
 
     @GET("appointment/{id}")
     suspend fun getAppointmentById(@Path("id") id: Int): Appointment

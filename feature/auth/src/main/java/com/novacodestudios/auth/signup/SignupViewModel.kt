@@ -14,14 +14,12 @@ import com.novacodestudios.ui.component.validateConfirmPassword
 import com.novacodestudios.ui.component.validateEmail
 import com.novacodestudios.ui.component.validateInput
 import com.novacodestudios.ui.component.validatePassword
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class SignupViewModel @Inject constructor(
+
+class SignupViewModel(
     private val repository: DonorRepository,
     private val preferences: DonorPreferences,
 ) : ViewModel() {
@@ -80,6 +78,7 @@ class SignupViewModel @Inject constructor(
                 bloodGroup = bloodGroupInput.value!!,
                 lastDonationDate = null,
             )
+            Log.d(TAG, "signup: addDonor :$addDonor")
             state = state.copy(isLoading = true)
 
             repository.signUp(addDonor).onFailure {

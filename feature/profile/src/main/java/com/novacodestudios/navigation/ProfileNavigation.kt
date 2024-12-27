@@ -6,8 +6,11 @@ import com.novacodestudios.model.screen.Screen
 import com.novacodestudios.profile.ProfileScreen
 
 fun NavGraphBuilder.profileRoute(
+    navigateToLogin:()->Unit
 ){
     composable<Screen.Profile>{
-        ProfileScreen()
+        ProfileScreen(
+            navigateToLogin = navigateToLogin
+        )
     }
 }

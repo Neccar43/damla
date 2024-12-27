@@ -4,7 +4,9 @@ import com.novacodestudios.model.AddDonor
 import com.novacodestudios.model.Donor
 import com.novacodestudios.model.DonorLoginRequest
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface DonorApi {
 
@@ -14,6 +16,6 @@ interface DonorApi {
     @POST("donor/login")
     suspend fun login(@Body request: DonorLoginRequest): Donor
 
-    @POST("donor/{id}")
-    suspend fun getDonor(id: Int): Donor
+    @GET("donor/{id}")
+    suspend fun getDonor(@Path("id") id: Int): Donor
 }

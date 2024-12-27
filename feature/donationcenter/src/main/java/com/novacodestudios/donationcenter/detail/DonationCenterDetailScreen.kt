@@ -12,17 +12,15 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
-import com.novacodestudios.model.screen.Screen
 import com.novacodestudios.ui.component.CardDetailItem
 import com.novacodestudios.ui.component.InfoCard
 import com.novacodestudios.ui.component.SipButton
-import com.novacodestudios.ui.component.isNotNull
 import kotlinx.coroutines.flow.collectLatest
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun DonationCenterDetailScreen(
-    viewModel: DonationCenterDetailViewModel = hiltViewModel(),
+    viewModel: DonationCenterDetailViewModel = koinViewModel(),
     navigateAppointment: (Int) -> Unit,
 ) {
     val snackbarHostState =
@@ -51,7 +49,7 @@ fun DonationCenterDetailScreenContent(
     state: DonationCenterDetailState,
     snackbarHostState: SnackbarHostState,
     onEvent: (DonationCenterDetailEvent) -> Unit,
-    navigateAppointment: (Int)->Unit
+    navigateAppointment: (Int) -> Unit
 ) {
     Scaffold(
         snackbarHost = { SnackbarHost(snackbarHostState) },
@@ -63,22 +61,22 @@ fun DonationCenterDetailScreenContent(
                 .fillMaxSize()
                 .padding(16.dp)
         ) {
-            if (state.donationCenter==null) return@Scaffold
-
+            state.donationCenter?.apply {
                 InfoCard {
-                    state.donationCenter.apply {
-                        CardDetailItem("Merkez",name)
-                        CardDetailItem("Adres",address)
-                        CardDetailItem("Enlem",latitude.toString())
-                        CardDetailItem("Boylam",longitude.toString())
-                        CardDetailItem("Mesai Saatleri","$openingTime - $closingTime")
-                    }
+                    CardDetailItem("Merkez", name)
+                    CardDetailItem("Adres", address)
+                    CardDetailItem("Enlem", latitude.toString())
+                    CardDetailItem("Boylam", longitude.toString())
+                    CardDetailItem("Mesai Saatleri", "$openingTime - $closingTime")
+
                     SipButton(
                         modifier = Modifier.fillMaxWidth(),
                         text = "Randevu Al",
-                        onClick = {navigateAppointment(state.donationCenter.id)}
+                        onClick = { navigateAppointment(id) }
                     )
                 }
+            }
+
         }
     }
 }

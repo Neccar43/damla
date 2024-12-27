@@ -2,8 +2,7 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
 
-    alias(libs.plugins.hiltAndroid)
-    alias(libs.plugins.ksp)
+
 
 }
 
@@ -47,7 +46,5 @@ dependencies {
 
     implementation(libs.androidx.datastore.preferences)
 
-    implementation(libs.hilt.android)
-    ksp(libs.hilt.android.compiler)
-    ksp(libs.androidx.hilt.compiler)
+    implementation(libs.koin.android)
 }

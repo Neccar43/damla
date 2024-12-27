@@ -23,6 +23,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.CreationExtras
 
 @Composable
 fun EmptyStateMessage(
@@ -97,6 +98,91 @@ fun RefreshStateMessage(
                 modifier = Modifier.padding(top = spacing)
             ) {
                 Text(text = refreshText)
+            }
+        }
+    }
+}
+
+
+@Composable
+fun EmptyStateMessageWithButton1(
+    modifier: Modifier = Modifier,
+    message: String,
+    icon: ImageVector = Icons.Default.Info,
+    iconTint: Color = MaterialTheme.colorScheme.primary,
+    messageStyle: TextStyle = MaterialTheme.typography.bodyMedium,
+    iconSize: Dp = 64.dp,
+    spacing: Dp = 16.dp,
+    onClick: () -> Unit,
+    buttonText: String,
+) {
+    Box(
+        modifier = modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+            modifier = Modifier.padding(spacing)
+        ) {
+            Icon(
+                imageVector = icon,
+                contentDescription = null,
+                tint = iconTint,
+                modifier = Modifier.size(iconSize)
+            )
+            Spacer(modifier = Modifier.height(spacing))
+            Text(
+                text = message,
+                style = messageStyle,
+                textAlign = TextAlign.Center
+            )
+            Button(
+                onClick = onClick,
+                modifier = Modifier.padding(top = spacing)
+            ) {
+                Text(text = buttonText)
+            }
+        }
+    }
+}
+
+@Composable
+fun EmptyStateMessageWithButton(
+    message: String,
+    buttonText: String,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    icon: ImageVector = Icons.Default.Info,
+    iconTint: Color = MaterialTheme.colorScheme.primary,
+    iconSize: Dp = 64.dp,
+    spacing: Dp = 16.dp,
+    messageStyle: TextStyle = MaterialTheme.typography.bodyMedium,
+) {
+    Box(
+        modifier = modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        Column(
+            modifier = Modifier.padding(spacing),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            Icon(
+                imageVector = icon,
+                contentDescription = null,
+                tint = iconTint,
+                modifier = Modifier.size(iconSize)
+            )
+            Spacer(modifier = Modifier.height(spacing))
+            Text(
+                text = message,
+                style = messageStyle,
+                textAlign = TextAlign.Center
+            )
+            Spacer(modifier = Modifier.height(spacing / 2))
+            Button(onClick = onClick) {
+                Text(text = buttonText)
             }
         }
     }

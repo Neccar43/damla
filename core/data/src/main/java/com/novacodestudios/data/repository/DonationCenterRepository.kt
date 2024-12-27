@@ -4,9 +4,8 @@ import com.novacodestudios.network.api.DonationCenterApi
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import javax.inject.Inject
 
-class DonationCenterRepository @Inject constructor(
+class DonationCenterRepository(
     private val api: DonationCenterApi,
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {

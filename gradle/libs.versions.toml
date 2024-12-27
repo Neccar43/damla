@@ -13,16 +13,17 @@ coilCompose = "2.6.0"
 coroutinesVersion = "1.9.0"
 datastorePreferences = "1.1.1"
 
-hiltAndroid = "2.54"
-hiltCompiler = "1.2.0"
+#hiltAndroid = "2.54"
+#hiltCompiler = "1.2.0"
 lifecycleViewmodelCompose = "2.8.7"
 
 navigationCompose = "2.8.5"
 
 
-ksp="2.1.0-1.0.29"
+#ksp="2.1.0-1.0.29"
 appcompat = "1.7.0"
 material = "1.12.0"
+koin = "4.0.0"
 
 
 [libraries]
@@ -42,15 +43,15 @@ androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }
-androidx-hilt-compiler = { module = "androidx.hilt:hilt-compiler", version.ref = "hiltCompiler" }
-androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltCompiler" }
-androidx-hilt-work = { module = "androidx.hilt:hilt-work", version.ref = "hiltCompiler" }
+#androidx-hilt-compiler = { module = "androidx.hilt:hilt-compiler", version.ref = "hiltCompiler" }
+#androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltCompiler" }
+#androidx-hilt-work = { module = "androidx.hilt:hilt-work", version.ref = "hiltCompiler" }
+#hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
+#hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltAndroid" }
 androidx-lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycleViewmodelCompose" }
 androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelCompose" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
-hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
-hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltAndroid" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutinesVersion" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutinesVersion" }
 kotlinx-coroutines-play-services = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services", version.ref = "coroutinesVersion" }
@@ -60,6 +61,12 @@ material = { group = "com.google.android.material", name = "material", version.r
 material-icons-core = { group = "androidx.compose.material", name = "material-icons-core" }
 material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended" }
 
+koin-core = {group = "io.insert-koin", name = "koin-core", version.ref = "koin"}
+koin-android = {group = "io.insert-koin", name = "koin-android", version.ref = "koin"}
+koin-androidx-startup = {group = "io.insert-koin", name = "koin-androidx-startup", version.ref = "koin"}
+koin-androidx-compose = {group = "io.insert-koin", name = "koin-androidx-compose", version.ref = "koin"}
+koin-androidx-workmanager = {group = "io.insert-koin", name = "koin-androidx-workmanager", version.ref = "koin"}
+koin-compose-viewmodel = {group = "io.insert-koin", name = "koin-compose-viewmodel", version.ref = "koin"}
 
 
 
@@ -72,8 +79,8 @@ android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 
-hiltAndroid={id="com.google.dagger.hilt.android", version.ref="hiltAndroid"}
-ksp={id="com.google.devtools.ksp", version.ref="ksp"}
+#hiltAndroid={id="com.google.dagger.hilt.android", version.ref="hiltAndroid"}
+#ksp={id="com.google.devtools.ksp", version.ref="ksp"}
 android-library = { id = "com.android.library", version.ref = "agp" }
 
 

@@ -2,9 +2,6 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-
-     alias(libs.plugins.hiltAndroid)
-     alias(libs.plugins.ksp)
 }
 
 android {
@@ -52,7 +49,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-
+    implementation(project(":core:datastore"))
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
@@ -66,12 +63,6 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.navigation.compose)
 
-    //hilt
-     implementation(libs.hilt.android)
-     ksp(libs.hilt.android.compiler)
-     ksp(libs.androidx.hilt.compiler)
-     implementation(libs.androidx.hilt.navigation.compose)
-    //implementation(libs.androidx.hilt.work)
 
 // Coroutines
     implementation(libs.kotlinx.coroutines.core)
@@ -87,11 +78,17 @@ dependencies {
 
     implementation(libs.androidx.datastore.preferences)
 
+    implementation(libs.koin.android)
+    implementation(libs.koin.androidx.compose)
+
+    implementation(libs.material.icons.core)
+    implementation(libs.material.icons.extended)
 
     //implementation("com.google.j2objc:j2objc-annotations:2.8")
     implementation(project(":core:ui"))
     implementation(project(":core:model"))
     implementation(project(":core:data"))
+    implementation(project(":core:network"))
 
     implementation(project(":feature:appointment"))
     implementation(project(":feature:auth"))

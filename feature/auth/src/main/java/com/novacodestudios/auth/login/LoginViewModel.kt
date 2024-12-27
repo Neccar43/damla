@@ -10,18 +10,13 @@ import com.novacodestudios.data.repository.DonorRepository
 import com.novacodestudios.datastore.DonorPreferences
 import com.novacodestudios.model.DonorLoginRequest
 import com.novacodestudios.ui.component.TextInput
-import com.novacodestudios.ui.component.validateConfirmPassword
 import com.novacodestudios.ui.component.validateEmail
-import com.novacodestudios.ui.component.validateInput
 import com.novacodestudios.ui.component.validatePassword
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class LoginViewModel @Inject constructor(
+class LoginViewModel(
     private val repository: DonorRepository,
     private val preferences: DonorPreferences,
 ) : ViewModel() {

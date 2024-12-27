@@ -1,14 +1,13 @@
 package com.novacodestudios.data.repository
 
-import com.novacodestudios.network.api.DonorApi
 import com.novacodestudios.model.AddDonor
 import com.novacodestudios.model.DonorLoginRequest
+import com.novacodestudios.network.api.DonorApi
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import javax.inject.Inject
 
-class DonorRepository @Inject constructor(
+class DonorRepository(
     private val api: DonorApi,
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
@@ -18,7 +17,7 @@ class DonorRepository @Inject constructor(
         }
     }
 
-    suspend fun login(request: com.novacodestudios.model.DonorLoginRequest) = withContext(dispatcher) {
+    suspend fun login(request: DonorLoginRequest) = withContext(dispatcher) {
         runCatching {
             api.login(request)
         }

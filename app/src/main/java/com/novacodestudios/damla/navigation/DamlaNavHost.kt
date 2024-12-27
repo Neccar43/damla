@@ -24,14 +24,17 @@ fun DamlaNavHost(
         modifier = modifier
     ) {
         appointmentRoute(
-            navigateToHome ={navHostController.navigate(Screen.Home)}
+            navigateToHome ={navHostController.navigate(Screen.Home)},
+            navigateBack ={navHostController.popBackStack()}
         )
         authRoute(
             navigateToHome ={navHostController.navigate(Screen.Home)},
             navigateToLogin ={navHostController.navigate(Screen.Login)},
             navigateToSignup ={navHostController.navigate(Screen.Signup)}
         )
-        donationRoute()
+        donationRoute(
+            navigateToDonationDetail = {navHostController.navigate(Screen.DonationDetail(it))},
+        )
 
         donationCenterRoute(
             navigateToDonationCenterDetail ={navHostController.navigate(Screen.DonationCenterDetail(it))},
@@ -41,12 +44,15 @@ fun DamlaNavHost(
             navigateToNotificationDetail ={navHostController.navigate(Screen.NotificationDetail(it))},
             navigateToAppointmentDetail ={navHostController.navigate(Screen.AppointmentDetail(it))},
             navigateToDonationDetail ={navHostController.navigate(Screen.DonationDetail(it))},
-            navigateToProfile ={navHostController.navigate(Screen.Profile)}
+            navigateToProfile ={navHostController.navigate(Screen.Profile)},
+            navigateToDonationCenterList ={navHostController.navigate(Screen.DonationCenterList)}
         )
         notificationRoute(
             navigateToNotificationDetail ={navHostController.navigate(Screen.NotificationDetail(it))},
             navigateToAppointment ={navHostController.navigate(Screen.Appointment(it))}
         )
-        profileRoute()
+        profileRoute(
+            navigateToLogin ={navHostController.navigate(Screen.Login)}
+        )
     }
 }

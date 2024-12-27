@@ -2,8 +2,6 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
 
-    alias(libs.plugins.hiltAndroid)
-    alias(libs.plugins.ksp)
     alias(libs.plugins.kotlin.compose)
 
 }
@@ -54,10 +52,9 @@ dependencies {
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
-    implementation(libs.hilt.android)
-    ksp(libs.hilt.android.compiler)
-    ksp(libs.androidx.hilt.compiler)
-    implementation(libs.androidx.hilt.navigation.compose)
+
+    implementation(libs.koin.compose.viewmodel)
+
     implementation(project(":core:ui"))
     implementation(project(":core:model"))
     implementation(project(":core:data"))

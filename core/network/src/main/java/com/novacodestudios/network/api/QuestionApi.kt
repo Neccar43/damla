@@ -4,6 +4,6 @@ import com.novacodestudios.model.Question
 import retrofit2.http.GET
 
 interface QuestionApi {
-    @GET("questions")
+    @GET("question")
     suspend fun getQuestions(): List<Question>
 }

@@ -12,14 +12,12 @@ import com.novacodestudios.data.repository.NotificationRepository
 import com.novacodestudios.model.DonationCenter
 import com.novacodestudios.model.Notification
 import com.novacodestudios.model.screen.Screen
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class NotificationDetailViewModel @Inject constructor(
+
+class NotificationDetailViewModel(
     private val savedStateHandle: SavedStateHandle,
     private val notificationRepository: NotificationRepository,
 ) : ViewModel() {

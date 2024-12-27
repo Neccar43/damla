@@ -8,7 +8,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
@@ -19,21 +22,25 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.novacodestudios.model.Appointment
-import com.novacodestudios.model.AppointmentStatus
 import com.novacodestudios.model.Donor
 import com.novacodestudios.ui.component.CardDetailItem
+import com.novacodestudios.ui.component.EmptyStateMessage
+import com.novacodestudios.ui.component.EmptyStateMessageWithButton
 import com.novacodestudios.ui.component.notification.NotificationListItem
+import com.novacodestudios.util.formatDateTime
+import com.novacodestudios.util.toUiText
 import kotlinx.coroutines.flow.collectLatest
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun HomeScreen(
-    viewModel: HomeViewModel = hiltViewModel(),
+    viewModel: HomeViewModel = koinViewModel(),
     navigateToNotificationDetail: (Int) -> Unit,
     navigateToAppointmentDetail: (Int) -> Unit,
     navigateToDonationDetail: (Int) -> Unit,
     navigateToProfile: () -> Unit,
+    navigateToDonationCenterList: () -> Unit,
 ) {
     val snackbarHostState =
         remember { SnackbarHostState() }
@@ -54,6 +61,7 @@ fun HomeScreen(
         navigateToAppointmentDetail = navigateToAppointmentDetail,
         navigateToDonationDetail = navigateToDonationDetail,
         navigateToProfile = navigateToProfile,
+        navigateToDonationCenterList = navigateToDonationCenterList
     )
 }
 
@@ -66,6 +74,7 @@ fun HomeScreenContent(
     navigateToAppointmentDetail: (Int) -> Unit,
     navigateToDonationDetail: (Int) -> Unit,
     navigateToProfile: () -> Unit,
+    navigateToDonationCenterList: () -> Unit,
 ) {
     Scaffold(
         snackbarHost = { SnackbarHost(snackbarHostState) },
@@ -85,7 +94,7 @@ fun HomeScreenContent(
                 SectionHeader("Bildirimler")
                 Spacer(modifier = Modifier.height(8.dp))
                 if (state.notifications.isEmpty()) {
-                    //EmptyStateMessage(message = "Şu anda bildirim yok")
+                    EmptyStateMessage(message = "Şu anda bildirim yok", icon = Icons.Default.Notifications)
                 } else {
                     state.notifications.forEach {
                         NotificationListItem(it, navigateToNotificationDetail)
@@ -94,21 +103,22 @@ fun HomeScreenContent(
 
 
             }
-            state.activeAppointment?.let {
+
                 item {
                     SectionHeader("Randevular")
                     Spacer(modifier = Modifier.height(8.dp))
-                    AppointmentInfoCard(
-                        appointment = it,
-                        onClick = { navigateToAppointmentDetail(it.id) }
+                    state.activeAppointment?.let {
+                        AppointmentInfoCard(
+                            appointment = it,
+                            onClick = { navigateToAppointmentDetail(it.id) }
+                        )
+                    }?: EmptyStateMessageWithButton(
+                        message = "Şu anda randevunuz yok",
+                        onClick = { navigateToDonationCenterList() },
+                        buttonText = "Randevu Al",
                     )
+
                 }
-            }
-
-
-            /*items(state.donations){
-
-            }*/
 
 
         }
@@ -158,26 +168,23 @@ fun AppointmentInfoCard(appointment: Appointment, onClick: () -> Unit) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 8.dp),
-        onClick = onClick
+        onClick = onClick,
         //elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
-        //colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer)
     ) {
         Column(
             modifier = Modifier.padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             //Text(text = donor.name, style = MaterialTheme.typography.titleLarge)
-            CardDetailItem("Tarih", appointment.date)
+
+            CardDetailItem("Tarih", formatDateTime(appointment.date))
             CardDetailItem("Merkez", appointment.donationCenter.name)
             CardDetailItem("Durum", appointment.status.toUiText())
         }
     }
 }
 
-fun AppointmentStatus.toUiText(): String = when (this) {
-    AppointmentStatus.SCHEDULED -> "Randevu Alındı"
-    AppointmentStatus.COMPLETED -> "Tamamlandı"
-    AppointmentStatus.CANCELED -> "İptal Edildi"
-}
+
 
 

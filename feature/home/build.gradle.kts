@@ -2,8 +2,6 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
 
-    alias(libs.plugins.hiltAndroid)
-    alias(libs.plugins.ksp)
     alias(libs.plugins.kotlin.compose)
 
 }
@@ -42,6 +40,7 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
+    implementation(project(":core:util"))
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -54,10 +53,9 @@ dependencies {
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
-    implementation(libs.hilt.android)
-    ksp(libs.hilt.android.compiler)
-    ksp(libs.androidx.hilt.compiler)
-    implementation(libs.androidx.hilt.navigation.compose)
+
+    implementation(libs.koin.compose.viewmodel)
+
     implementation(project(":core:ui"))
     implementation(project(":core:model"))
     implementation(project(":core:data"))

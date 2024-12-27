@@ -1,5 +1,6 @@
 package com.novacodestudios.home
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -11,18 +12,17 @@ import com.novacodestudios.data.repository.DonorRepository
 import com.novacodestudios.data.repository.NotificationRepository
 import com.novacodestudios.datastore.DonorPreferences
 import com.novacodestudios.model.Appointment
-import com.novacodestudios.model.Donation
+import com.novacodestudios.model.AppointmentStatus
 import com.novacodestudios.model.Donor
 import com.novacodestudios.model.Notification
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class HomeViewModel @Inject constructor(
+
+class HomeViewModel (
     private val donorRepository: DonorRepository,
     private val notificationRepository: NotificationRepository,
     private val appointmentRepository: AppointmentRepository,
@@ -46,8 +46,9 @@ class HomeViewModel @Inject constructor(
 
     private suspend fun getDonor() {
         val id = preferences.getDonorId.first() ?: return
-
+        Log.d(TAG, "getDonor: id $id")
         donorRepository.getDonor(id).onSuccess {
+            Log.d(TAG, "getDonor: donor: $it")
             state = state.copy(donor = it)
         }.onFailure {
             _eventFlow.emit(UIState.ShowSnackBar("Error getting donor"))
@@ -57,19 +58,31 @@ class HomeViewModel @Inject constructor(
 
     private fun getNotifications() {
         viewModelScope.launch {
-            notificationRepository.getActiveNotifications().onSuccess {
+            /*notificationRepository.getActiveNotifications().onSuccess {
+                Log.d(TAG, "getNotifications: notification : $it")
                 state = state.copy(notifications = it)
             }.onFailure {
                 _eventFlow.emit(UIState.ShowSnackBar("Error getting notifications"))
+            }*/
+
+            notificationRepository.getActiveNotificationsFlow().collectLatest {
+                Log.d(TAG, "getNotifications: notification : $it")
+                state = state.copy(notifications = it)
             }
         }
     }
 
     private suspend fun getAppointments() {
-        appointmentRepository.getAppointments(state.donor.id).onSuccess {
-            state = state.copy(activeAppointment = it.first())
+       /* appointmentRepository.getAppointments(state.donor.id).onSuccess { appointments ->
+            Log.d(TAG, "getAppointments: appointment : $appointments")
+            state = state.copy(activeAppointment = appointments.firstOrNull { it.status == AppointmentStatus.SCHEDULED })
         }.onFailure {
             _eventFlow.emit(UIState.ShowSnackBar("Error getting appointments"))
+        }*/
+
+        appointmentRepository.getAppointmentsPollingFlow(state.donor.id).collectLatest { appointments ->
+            Log.d(TAG, "getAppointments: appointment : $appointments")
+            state = state.copy(activeAppointment = appointments.firstOrNull { it.status == AppointmentStatus.SCHEDULED })
         }
 
     }
@@ -80,6 +93,10 @@ class HomeViewModel @Inject constructor(
 
     sealed interface UIState {
         data class ShowSnackBar(val message: String) : UIState
+    }
+    
+    companion object{
+        private const val TAG = "HomeViewModel"
     }
 }
 
@@ -92,5 +109,6 @@ data class HomeState(
 )
 
 sealed interface HomeEvent {
+    //data object OnCreateAppointmentClicked : HomeEvent
 
 }

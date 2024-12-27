@@ -3,8 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     id("org.jetbrains.kotlin.plugin.serialization")
 
-    alias(libs.plugins.hiltAndroid)
-    alias(libs.plugins.ksp)
+
 }
 
 android {
@@ -45,6 +44,8 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
+    implementation(libs.koin.android)
+
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
@@ -53,8 +54,5 @@ dependencies {
 
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
 
-    implementation(libs.hilt.android)
-    ksp(libs.hilt.android.compiler)
-    ksp(libs.androidx.hilt.compiler)
     implementation(project(":core:model"))
 }

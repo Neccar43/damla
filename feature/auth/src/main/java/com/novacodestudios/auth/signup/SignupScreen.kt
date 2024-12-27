@@ -21,19 +21,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
-import com.novacodestudios.auth.login.LoginEvent
 import com.novacodestudios.ui.component.SipButton
 import com.novacodestudios.ui.component.SipEmailField
 import com.novacodestudios.ui.component.SipOutlinedTextField
 import com.novacodestudios.ui.component.SipPasswordField
 import com.novacodestudios.ui.component.SipTextButton
-import com.novacodestudios.ui.component.SipTextField
 import kotlinx.coroutines.flow.collectLatest
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun SignupScreen(
-    viewModel: SignupViewModel = hiltViewModel(),
+    viewModel: SignupViewModel = koinViewModel(),
     navigateToHome: () -> Unit,
     navigateToLogin: () -> Unit,
 ) {

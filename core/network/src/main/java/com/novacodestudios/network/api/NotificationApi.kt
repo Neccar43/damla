@@ -2,6 +2,7 @@ package com.novacodestudios.network.api
 
 import com.novacodestudios.model.Notification
 import retrofit2.http.GET
+import retrofit2.http.Path
 
 interface NotificationApi {
 
@@ -9,5 +10,5 @@ interface NotificationApi {
     suspend fun getActiveNotifications(): List<Notification>
 
     @GET("notification/{id}")
-    suspend fun getNotification(id: Int): Notification
+    suspend fun getNotification(@Path("id")id: Int): Notification
 }

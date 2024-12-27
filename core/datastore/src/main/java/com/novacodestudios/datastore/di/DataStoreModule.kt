@@ -1,20 +1,14 @@
 package com.novacodestudios.datastore.di
 
+import android.app.Application
 import android.content.Context
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
-import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
+import com.novacodestudios.datastore.DonorPreferences
+import com.novacodestudios.datastore.dataStore
+import org.koin.android.ext.koin.androidContext
+import org.koin.dsl.module
 
-@Module
-@InstallIn(SingletonComponent::class)
-object DataStoreModule {
 
-    @Provides
-    @Singleton
-    fun provideApplicationContext(@ApplicationContext context: Context): Context {
-        return context
-    }
+val dataStoreModule = module {
+    single { androidContext().dataStore }
+    single { DonorPreferences(get()) }
 }

@@ -1,13 +1,11 @@
 package com.novacodestudios.data.repository
 
 import com.novacodestudios.network.api.AnswerApi
-import com.novacodestudios.model.AddAnswer
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import javax.inject.Inject
 
-class AnswerRepository @Inject constructor(
+class AnswerRepository(
     private val api: AnswerApi,
     private val dispatcher: CoroutineDispatcher= Dispatchers.IO
 ) {

@@ -1,6 +1,5 @@
 package com.novacodestudios.notification.list
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -13,13 +12,13 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.novacodestudios.ui.component.notification.NotificationListItem
 import kotlinx.coroutines.flow.collectLatest
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun NotificationListScreen(
-    viewModel: NotificationListViewModel = hiltViewModel(),
+    viewModel: NotificationListViewModel = koinViewModel(),
     navigateToNotificationDetail: (Int) -> Unit,
 ) {
     val snackbarHostState =

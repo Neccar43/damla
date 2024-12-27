@@ -10,13 +10,15 @@ fun NavGraphBuilder.homeRoute(
     navigateToAppointmentDetail: (Int) -> Unit,
     navigateToDonationDetail: (Int) -> Unit,
     navigateToProfile: () -> Unit,
+    navigateToDonationCenterList: () -> Unit
 ){
     composable<Screen.Home>{
         HomeScreen(
             navigateToNotificationDetail = navigateToNotificationDetail,
             navigateToAppointmentDetail = navigateToAppointmentDetail,
             navigateToDonationDetail = navigateToDonationDetail,
-            navigateToProfile = navigateToProfile
+            navigateToProfile = navigateToProfile,
+            navigateToDonationCenterList = navigateToDonationCenterList
         )
     }
 }

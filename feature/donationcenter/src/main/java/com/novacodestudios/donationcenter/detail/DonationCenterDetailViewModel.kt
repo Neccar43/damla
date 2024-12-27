@@ -11,14 +11,12 @@ import androidx.navigation.toRoute
 import com.novacodestudios.data.repository.DonationCenterRepository
 import com.novacodestudios.model.DonationCenter
 import com.novacodestudios.model.screen.Screen
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class DonationCenterDetailViewModel @Inject constructor(
+
+class DonationCenterDetailViewModel(
     private val savedStateHandle: SavedStateHandle,
     private val repository: DonationCenterRepository,
 ) : ViewModel() {

@@ -15,15 +15,17 @@ import com.novacodestudios.model.AddAppointment
 import com.novacodestudios.model.AddAppointmentRequest
 import com.novacodestudios.model.InsertAnswer
 import com.novacodestudios.model.screen.Screen
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
-import javax.inject.Inject
+import java.time.Instant
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.ZoneId
 
-@HiltViewModel
-class AppointmentViewModel @Inject constructor(
+
+class AppointmentViewModel(
     private val questionRepository: QuestionRepository,
     private val appointmentRepository: AppointmentRepository,
     private val preferences: DonorPreferences,
@@ -75,7 +77,10 @@ class AppointmentViewModel @Inject constructor(
     private fun submitAppointment() {
         viewModelScope.launch {
             val addAppointment=AddAppointment(
-                appointmentDate = state.selectedDate.toString(),
+                appointmentDate = LocalDateTime.ofInstant(
+                    Instant.ofEpochMilli(state.selectedDate),
+                    ZoneId.systemDefault()
+                ).toString(),
                 donorId = preferences.getDonorId.first()!!,
                 centerId = state.centerId,
             )
@@ -87,6 +92,8 @@ class AppointmentViewModel @Inject constructor(
                     answerText = it.answer
                 ) }
             )
+
+            Log.d(TAG, "Add appointment request: $addAppointmentRequest")
 
             appointmentRepository.addAppointment(addAppointmentRequest)
                 .onFailure {

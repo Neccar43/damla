@@ -1,6 +1,5 @@
 package com.novacodestudios.auth.login
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -9,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Divider
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -23,18 +21,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.novacodestudios.ui.component.SipButton
 import com.novacodestudios.ui.component.SipEmailField
-import com.novacodestudios.ui.component.SipOutlinedTextField
 import com.novacodestudios.ui.component.SipPasswordField
 import com.novacodestudios.ui.component.SipTextButton
-import com.novacodestudios.ui.component.SipTextField
 import kotlinx.coroutines.flow.collectLatest
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun LoginScreen(
-    viewModel: LoginViewModel = hiltViewModel(),
+    viewModel: LoginViewModel = koinViewModel(),
     navigateToHome: () -> Unit,
     navigateToSignup: () -> Unit,
 ) {

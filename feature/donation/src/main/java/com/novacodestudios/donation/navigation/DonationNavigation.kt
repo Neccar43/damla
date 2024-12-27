@@ -7,9 +7,12 @@ import com.novacodestudios.donation.list.DonationListScreen
 import com.novacodestudios.model.screen.Screen
 
 fun NavGraphBuilder.donationRoute(
+    navigateToDonationDetail: (Int) -> Unit
 ){
     composable<Screen.DonationList>{
-        DonationListScreen()
+        DonationListScreen(
+            navigateToDonationDetail = navigateToDonationDetail
+        )
     }
 
     composable<Screen.DonationDetail>{

@@ -2,7 +2,6 @@ package com.novacodestudios.donationcenter.list
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -20,13 +19,13 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.novacodestudios.model.DonationCenter
 import kotlinx.coroutines.flow.collectLatest
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun DonationCenterListScreen(
-    viewModel: DonationCenterListViewModel = hiltViewModel(),
+    viewModel: DonationCenterListViewModel = koinViewModel(),
     navigateToDonationCenterDetail: (Int) -> Unit,
 ) {
     val snackbarHostState =

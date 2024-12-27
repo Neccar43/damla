@@ -8,7 +8,8 @@ import com.novacodestudios.model.screen.Screen
 
 
 fun NavGraphBuilder.appointmentRoute(
-    navigateToHome: () -> Unit
+    navigateToHome: () -> Unit,
+    navigateBack: () -> Unit
 ){
     composable<Screen.Appointment>{
         AppointmentScreen(
@@ -17,6 +18,8 @@ fun NavGraphBuilder.appointmentRoute(
     }
 
     composable<Screen.AppointmentDetail>{
-        AppointmentDetailScreen()
+        AppointmentDetailScreen(
+            navigateBack = navigateBack
+        )
     }
 }
